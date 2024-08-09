@@ -68,7 +68,7 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer YOUR_OPENAI_API_KEY'
+                    'Authorization': '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'
                 },
                 body: JSON.stringify({
                     prompt: `Suggest some recipes using the following ingredients: ${ingredients}.`,
