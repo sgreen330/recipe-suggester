@@ -10,13 +10,10 @@ const port = process.env.PORT || 3000;
 
 // Enable CORS for your frontend domains
 app.use(cors({
-    origin: [
-        'https://sgreen330.github.io',  // GitHub Pages
-        'https://recipe-suggester-git-main-sarah-greens-projects.vercel.app',  // Vercel deployment
-    ],
+    origin: 'https://sgreen330.github.io',  // Allow only your GitHub Pages domain
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // This allows cookies to be sent in cross-site requests
+    credentials: true, // This allows cookies to be sent in cross-site requests if needed
 }));
 
 app.use(express.json());
