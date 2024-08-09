@@ -8,10 +8,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Enable CORS for your frontend domain
+// Enable CORS for both GitHub Pages and Vercel frontend domains
 app.use(cors({
-    origin: 'https://sgreen330.github.io', // Allow requests only from your GitHub Pages site
-    methods: ['GET', 'POST'], // Specify allowed methods
+    origin: ['https://sgreen330.github.io', 'https://recipe-suggester-xi.vercel.app'], // Allow requests from both your GitHub Pages site and Vercel
+    methods: ['GET', 'POST'],
 }));
 
 app.use(express.json());
