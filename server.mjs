@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(cors({
     origin: [
         'https://sgreen330.github.io',  // GitHub Pages
-        'https://recipe-suggester-git-main-sarah-greens-projects.vercel/get-recipes.app',  // Vercel deployment
+        'https://recipe-suggester-git-main-sarah-greens-projects.vercel.app',  // Vercel deployment
     ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
