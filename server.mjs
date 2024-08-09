@@ -8,10 +8,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Enable CORS for both GitHub Pages and Vercel frontend domains
+// Enable CORS for your frontend domains
 app.use(cors({
-    origin: ['https://sgreen330.github.io', 'https://recipe-suggester-xi.vercel.app'], // Allow requests from both your GitHub Pages site and Vercel
+    origin: [
+        'https://sgreen330.github.io',  // GitHub Pages
+        'https://recipe-suggester-git-main-sarah-greens-projects.vercel.app',  // Vercel deployment
+    ],
     methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // This allows cookies to be sent in cross-site requests
 }));
 
 app.use(express.json());
@@ -38,7 +43,6 @@ app.post('/get-recipes', async (req, res) => {
         }
 
         const data = await response.json();
-        // Split the response text into an array of recipe suggestions
         const recipes = data.choices[0].text.split('\n').filter(line => line.trim() !== '');
         res.json(recipes);
     } catch (error) {
