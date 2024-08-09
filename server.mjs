@@ -1,16 +1,16 @@
 import express from 'express';
 import fetch from 'node-fetch';
-import cors from 'cors'; // Import cors
+import cors from 'cors';
 import dotenv from 'dotenv';
 
-dotenv.config();  // Load environment variables from .env file
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Enable CORS for your frontend domain
 app.use(cors({
-    origin: '*', // Allow requests from any origin
+    origin: 'https://sgreen330.github.io', // Allow requests only from your GitHub Pages site
     methods: ['GET', 'POST'], // Specify allowed methods
 }));
 
@@ -34,18 +34,19 @@ app.post('/get-recipes', async (req, res) => {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch recipes');
+            throw new Error(`OpenAI API returned an error: ${response.statusText}`);
         }
 
         const data = await response.json();
-        res.json(data.choices[0].text.trim().split('\n').filter(line => line));
+        // Split the response text into an array of recipe suggestions
+        const recipes = data.choices[0].text.split('\n').filter(line => line.trim() !== '');
+        res.json(recipes);
     } catch (error) {
         console.error("Error during API request:", error);
-        res.status(500).json({ error: 'Failed to fetch recipes' });
+        res.status(500).send("There was an error fetching the recipes. Please try again.");
     }
 });
 
-// Start the server
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });
